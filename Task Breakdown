@@ -1,0 +1,23 @@
+Stephanie Figuroa-
+  Copy/paste Zip Codes
+    http://www.zipcodestogo.com/lookups/radius-search.php
+    Pick Area 
+    Help Victor with station list
+  
+Stephanie Loya-
+  Latitude and Logitude calculations
+    Input: a .txt with latatitude and longitude seperated by a comma
+    Output: a .txt with the average min distance.
+  
+Victor Fernandez-
+  Look into data mining extension
+  Get list of stations
+    http://www.elpasogasprices.com/GasPriceSearch.aspx
+    Input: a .txt with a list of zip codes
+    Output: a .txt with a list of URL.
+
+Joseph Gutierrez-
+  Actual run web scraper.
+  Help Stephanie Loya 
+  Help Victor and Stephaine Figuroa
+  
