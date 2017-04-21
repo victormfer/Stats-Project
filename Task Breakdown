@@ -1,23 +1,32 @@
+***** All files and code should be commited to the repository for ease of access for the rest of the group*****
+
 Stephanie Figuroa-
-  Copy/paste Zip Codes
-    http://www.zipcodestogo.com/lookups/radius-search.php
-    Pick Area 
+    Copy/paste Zip Codes
+        http://www.zipcodestogo.com/lookups/radius-search.php
+        Pick Area 
+        Input: online zip code list
+        Output: a .txt with all of the zip codes in our incuded area
     Help Victor with station list
   
 Stephanie Loya-
-  Latitude and Logitude calculations
-    Input: a .txt with latatitude and longitude seperated by a comma
-    Output: a .txt with the average min distance.
+    Latitude and Logitude calculations
+        Input: a .txt with latatitude and longitude seperated by a comma
+        Output: a .txt with the average min distance.
   
 Victor Fernandez-
-  Look into data mining extension
-  Get list of stations
-    http://www.elpasogasprices.com/GasPriceSearch.aspx
-    Input: a .txt with a list of zip codes
-    Output: a .txt with a list of URL.
+    Look into data mining extension
+    Get list of stations
+        http://www.elpasogasprices.com/GasPriceSearch.aspx
+        Input: a .txt with a list of zip codes
+        Output: a .txt with a list of URLs.
 
 Joseph Gutierrez-
-  Actual run web scraper.
-  Help Stephanie Loya 
-  Help Victor and Stephaine Figuroa
+    Latitude and longitude scraper
+        Input: a .txt with a list of URLs.
+        Output: a .txt with latatitude and longitude seperated by a comma
+    Gas price scraper
+        Input: a .txt with a list of URLs.
+        Output:a .txt with the gas prices of each corresponding gas station
+    Help Stephanie Loya 
+    Help Victor and Stephaine Figuroa
   
