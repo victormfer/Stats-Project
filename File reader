@@ -29,56 +29,46 @@ public class STATS{
     
     double[][] array =new double[fileToArray.size()][];
     for(int i =0; i < array.length; i++){
-         final String currentString = fileToArray.get(i);
-         final String[] split = currentString.split(",");
+         String currentString = fileToArray.get(i);
+         String[] split = currentString.split(",");
          array[i] = new double [split.length];
          for(int j = 0; j < array[i].length; j++){
            array[i][j] = Double.parseDouble(split[j]);
          }
     }
-     columnsAverage(array);
+     average(array);
      
      
   }
   
   
-    public static void columnsAverage(double [][]  array)throws Exception{
+    public static void average(double [][]  array)throws Exception{
        
-       int length = 0;
-       for(int i =  0; i < array.length; i++){
-         int lengthActual = array[i].length;
-         if(lengthActual > length){
-          length = lengthActual;
-         }
+         
+      for(int i = 0; i < array.length; i++){
+       double sum = 0;
+       for(int j = 0; j < array[i].length; j++){
+          
+         sum = sum + array[i][j];
+       
        }
        
-       //Sum columns
-       double [] sumColumns = new double[length];
-        
-       Arrays.fill(sumColumns, 0);
+     double average = 0;
        
-       for(int row = 0; row < array.length; row++){
-         for(int column = 0; column < array[row].length; column++){
-            sumColumns[column] = sumColumns[column]+ array[row][column];
-         
-           }
-         }
-       
-       double average = 0;
-       
-    for(int r = 0; r < sumColumns.length; r++){
-      average = sumColumns[r]/array.length;
+      average = sum/array[i].length;
        System.out.println(average);
+      
       File f = new File("STATS file.txt");
   
-       PrintWriter pw = new PrintWriter(f);
+  PrintWriter pw = new PrintWriter(f);
   
-        pw.println(average);
-        pw.flush();
-        pw.close();
-     }
-       
+  pw.println(average);
+  pw.flush();
+  pw.close();
+   
     }
+       
+  }
        
        
 
@@ -91,5 +81,5 @@ public class STATS{
        //Call method readFile.
        readFile(file);
    
-     }
   }
+}
