@@ -43,11 +43,11 @@ public class STATS{
   
   
     public static void average(double [][]  array)throws Exception{
-       
-         
+           
       for(int i = 0; i < array.length; i++){
        double sum = 0;
-       for(int j = 0; j < array[i].length; j++){
+       Arrays.sort(array[i]);
+       for(int j = 0; j < 5; j++){
           
          sum = sum + array[i][j];
        
@@ -55,7 +55,7 @@ public class STATS{
        
      double average = 0;
        
-      average = sum/array[i].length;
+      average = sum/5;
        System.out.println(average);
       
       File f = new File("STATS file.txt");
