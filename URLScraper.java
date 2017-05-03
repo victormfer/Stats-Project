@@ -20,11 +20,12 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.io.IOException;
 
 public class URLScraper{
-  public static void main(String [] args) throws FileNotFoundException{
+  public static void main(String [] args) throws FileNotFoundException, IOException{
     //open the .txt file with the zipcodes
-    BufferedReader br = new BufferedReader(new FileReader("Blosum62.txt"));
+    BufferedReader br = new BufferedReader(new FileReader("zipcodes.txt"));
     //create a String ArrayList with the zipcodes
     String line = "";
     ArrayList<String> zipcodes = new ArrayList<String>();
@@ -33,9 +34,7 @@ public class URLScraper{
     }
     br.close();
     //pass string ArrayList to a method that makes an array list with anchors from the given zipcodes.
-    ArrayList<String> anchors = getAnchors(zipcodes);
-    //takes in anchors and returns just the URLs
-    ArrayList<String> URLs = getURLs(anchors);
+    ArrayList<String> URLs = getURLs(zipcodes);
     //check for and take out any duplicate URLs
     URLs = deleteDuplicates(URLs);
     //export data to a .txt file
@@ -43,40 +42,28 @@ public class URLScraper{
     System.out.println("Done!");
   }
 
-  public static ArrayList<String> getAnchors(ArrayList<String> zipcodes){
+  public static ArrayList<String> getURLs(ArrayList<String> zipcodes){
     System.out.println("Getting Anchors...");
-    ArrayList<String> anchors = new ArrayList<String>();
+    ArrayList<String> URLs = new ArrayList<String>();
     for(int i = 0; i < zipcodes.size(); i ++){
+      System.out.println(i + " of " + zipcodes.size());
       try{
         UserAgent userAgent = new UserAgent();
-        userAgent.visit("https://www.gasbuddy.com/");
+        userAgent.visit("http://www.elpasogasprices.com/GasPriceSearch.aspx");
         userAgent.doc.apply(zipcodes.get(i));
-        userAgent.doc.submit("search-btn");
+        //for debugging purposes
+        //System.out.println(userAgent.doc.innerHTML());
+        userAgent.doc.submit();
 
-        Elements strong = userAgent.doc.findEvery("<strong>");
-        List<Element> links = strong.toList();
+        Elements dts = userAgent.doc.findEvery("<dt>");
+        List<Element> links = dts.toList();
         for(int j = 0; j < links.size(); j++){
-          if(links.get(j).getInnerText().contains("<a href = \"\\Station\\")){
-            anchors.add(links.get(j).getInnerText());
-          }
+            URLs.add(links.get(j).findFirst("<a href>").getAt("href"));
         }
       }
       catch(JauntException e){
         System.err.println(e);
       }
-    }
-    return anchors;
-  }
-
-  public static ArrayList<String> getURLs(ArrayList<String> anchors){
-    System.out.println("Getting URLs...");
-    ArrayList<String> URLs = new ArrayList<String>();
-    String [] info = new String [1];
-    //splits it into 3 parts: before quotation, between quotations, and after quotation
-    // we want therefore the middle.
-    for(int i = 0; i < anchors.size(); i ++){
-      info = anchors.get(i).split("\"");
-      URLs.add(info[1]);
     }
     return URLs;
   }
@@ -104,3 +91,4 @@ public class URLScraper{
   }
 
 }
+
