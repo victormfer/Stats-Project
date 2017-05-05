@@ -7,26 +7,26 @@ import java.util.Scanner;
 
 
 public class STATS{
-  
+
 //File reader method.
   public static void readFile(String fileName) throws Exception{
-    
+
     //File reader.
     String line;
     FileReader myFileReader = new FileReader(fileName);
     BufferedReader myTextReader = new BufferedReader(myFileReader);
-    
+
     //File into array.
     ArrayList<String> fileToArray = new ArrayList<String>();
     while((line = myTextReader.readLine())!=null){
-      
+
          fileToArray.add(line);
-         
+
     }
-    
-    
+
+
    //Read array.
-    
+
     double[][] array =new double[fileToArray.size()][];
     for(int i =0; i < array.length; i++){
          String currentString = fileToArray.get(i);
@@ -37,49 +37,84 @@ public class STATS{
          }
     }
      average(array);
-     
-     
+
+
   }
-  
-  
-    public static void average(double [][]  array)throws Exception{
-           
+  public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
+  public int calculateDistanceInKm(double userLat, double userLng,double venueLat, double venueLng) {
+
+      double latDistance = Math.toRadians(userLat - venueLat);
+      double lngDistance = Math.toRadians(userLng - venueLng);
+
+      double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+        + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))
+        * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+      double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
+  }
+  public static double[][] BuildDistMatrix(double[][] array){
+    double [][] matrixD = new double[arr.length][arr.length];
+      for(int i=0;i<arr.length;i++){
+        matrixD[i][i] = Integer.Max_Value;
+          for(int j=1+i; j < arr.length;j++){
+            double distance = calculateDistanceInKm(matrixD[i][0], matrixD[i][1], matrixD[j][0], matrixD[j][1]);
+            matrixD[i][j] = d;
+            matrixD[j][i] = d;
+          }
+      }
+      return matrixD;
+  }
+  public static
+
+  public static int[][] average(double[][] matrixD){
+    double sum = 0;
+    for(int i=0; i< matrixD.length;i++){
+      for(int j=0; i < matrixD.length;j++){
+
+      }
+    }
+  }
+
+    /*public static void average(double [][]  array)throws Exception{
+
       for(int i = 0; i < array.length; i++){
        double sum = 0;
        Arrays.sort(array[i]);
        for(int j = 0; j < 5; j++){
-          
+
          sum = sum + array[i][j];
-       
+
        }
-       
+
      double average = 0;
-       
+
       average = sum/5;
        System.out.println(average);
-      
+
       File f = new File("STATS file.txt");
-  
+
   PrintWriter pw = new PrintWriter(f);
-  
+
   pw.println(average);
   pw.flush();
   pw.close();
-   
+
     }
-       
-  }
-       
-       
+
+  }*/
+
+
 
   public static void main(String[] args) throws Exception{
-  
+
       Scanner keyboard = new Scanner(System.in);
-      System.out.println("Name of file (Ex: name.txt) : " ); 
+      System.out.println("Name of file (Ex: name.txt) : " );
       String file = keyboard.nextLine();
-      
+
        //Call method readFile.
        readFile(file);
-   
+
   }
 }
